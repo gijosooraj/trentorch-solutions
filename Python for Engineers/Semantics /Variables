@@ -1,1 +1,69 @@
+"""
+Variables | TrenTorch
+Module: Python for Engineers > Semantics
+Difficulty: Beginner
+Tags: python-core, variables
+"""
 
+# ------------------------------------------------------------
+# WHAT A VARIABLE IS
+# ------------------------------------------------------------
+# A variable is a name that points to a value stored in memory.
+#
+# - Created by assignment: x = 5 (name on the left, value on the right).
+# - Reassigning (x = 10) points the name at a new value.
+# - Python is dynamically typed: no type declaration needed, and the
+#   same name can hold an int now and a string later.
+# - Shorthand operators update a variable using its current value:
+#   x += 1 is the same as x = x + 1 (also -=, *=, /=).
+# - Naming rules: letters, digits and underscores only, can't start
+#   with a digit, case-sensitive (total and Total are different).
+#   Convention is snake_case, e.g. unit_price.
+
+
+# ------------------------------------------------------------
+# PROBLEM
+# ------------------------------------------------------------
+# 1. compute_total(price, quantity)
+#    Using separate variables (not one combined expression):
+#      - subtotal = price * quantity
+#      - tax = 8% of subtotal (0.08)
+#      - add tax to subtotal using the += shorthand
+#    Return the final subtotal.
+#
+# 2. swap_two_variables(a, b)
+#    Swap the two values using a temporary third variable
+#    (like pouring one cup into a spare cup first), then
+#    return a, b.
+
+
+# ------------------------------------------------------------
+# SOLUTION
+# ------------------------------------------------------------
+def compute_total(price: float, quantity: int) -> float:
+    subtotal = price * quantity
+    tax = subtotal * 0.08
+    subtotal += tax
+    return subtotal
+
+
+def swap_two_variables(a, b):
+    temp = a
+    a = b
+    b = temp
+    return a, b
+
+
+# ------------------------------------------------------------
+# NOTES
+# ------------------------------------------------------------
+# - compute_total(10, 3): subtotal = 30, tax = 2.4, returns 32.4
+# - Without temp, "a = b" would overwrite a's original value before
+#   b could receive it, so both would end up equal.
+# - Python shortcut for later: a, b = b, a
+
+
+if __name__ == "__main__":
+    print(compute_total(10, 3))        # 32.4
+    print(compute_total(50, 2))        # 108.0
+    print(swap_two_variables(1, 2))    # (2, 1)
