@@ -1,1 +1,107 @@
+"""
+Functions | TrenTorch
+Module: Python for Engineers > Semantics
+Difficulty: Beginner
+Tags: python-core, functions
+"""
 
+# ------------------------------------------------------------
+# WHAT A FUNCTION IS
+# ------------------------------------------------------------
+# A function is a named, reusable block of code. You write the logic
+# once, then run it whenever you call its name.
+#
+# - Define with def, a name, parameters in brackets, and a colon.
+#   The indented lines underneath are the body.
+# - Defining a function does not run it. Calling it does: greet("Sam")
+#
+# Parameters vs arguments:
+# - Parameter: the placeholder name in the definition (name in greet(name))
+# - Argument: the actual value passed in the call ("Sam" in greet("Sam"))
+# - The parameter name is just a label. def say_hi(sooraj) works the same
+#   as def say_hi(name); whatever you pass in gets stored in it.
+#
+# Each call is separate:
+# - greet("Sooraj") then greet("Alex") prints both. The second call does
+#   not overwrite the first; each call gets a fresh parameter that is
+#   thrown away when the function finishes.
+#
+# return vs print:
+# - return gives a value back to the caller and ends the function.
+# - print only shows text on screen. A function with no return gives
+#   back None, so tests that check the result will fail.
+#
+# Quotes matter:
+# - "Sooraj" (in quotes) is a string, the actual text.
+# - sooraj (no quotes) is a variable name; Python looks up its value.
+#
+# Type hints (labels only, Python does not enforce them):
+# - str = text, int = whole number, float = decimal, bool = True/False
+# - def is_even(n: int) -> bool means n should be an int and the
+#   function returns a bool.
+#
+# Division operators:
+# - 7 / 2  = 3.5  (normal division)
+# - 7 // 2 = 3    (floor division, whole part only)
+# - 7 % 2  = 1    (modulo, the remainder)
+
+
+# ------------------------------------------------------------
+# PROBLEM
+# ------------------------------------------------------------
+# 1. is_even(n): return True if n is even, False otherwise.
+#
+# 2. greet_formal(name, title): return the string exactly in the form
+#    "Good day, {title} {name}."
+#    e.g. greet_formal("Smith", "Dr.") -> "Good day, Dr. Smith."
+#
+# 3. apply_twice(func, value): call func on value, then call func
+#    again on that result, and return the final result.
+#    e.g. apply_twice(lambda x: x + 1, 5) -> 7
+
+
+# ------------------------------------------------------------
+# SOLUTION
+# ------------------------------------------------------------
+def is_even(n: int) -> bool:
+    return n % 2 == 0
+
+
+def greet_formal(name: str, title: str) -> str:
+    return f"Good day, {title} {name}."
+
+
+def apply_twice(func, value):
+    return func(func(value))
+
+
+# ------------------------------------------------------------
+# NOTES
+# ------------------------------------------------------------
+# is_even
+# - n % 2 == 0 already evaluates to True or False, so it can be
+#   returned directly without an if/else.
+# - == compares values; a single = assigns.
+#
+# greet_formal
+# - My first attempt used print("Good day," + title + name). Three bugs:
+#   print instead of return, missing spaces, missing full stop.
+# - Concatenation version: "Good day, " + title + " " + name + "."
+# - The f-string version puts variables inside {} and makes spacing
+#   easier to get right.
+#
+# apply_twice
+# - Functions can be passed into other functions as arguments.
+# - Step by step: first = func(value), then second = func(first).
+# - lambda x: x + 1 is a short way of writing:
+#       def add_one(x):
+#           return x + 1
+# - Pass a function without brackets (add_one), because add_one()
+#   would run it immediately instead of passing it in.
+
+
+if __name__ == "__main__":
+    print(is_even(4))                          # True
+    print(is_even(7))                          # False
+    print(greet_formal("Smith", "Dr."))        # Good day, Dr. Smith.
+    print(apply_twice(lambda x: x + 1, 5))     # 7
